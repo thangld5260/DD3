@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, FlatList, Text, TouchableHighlight, Image } from 'react-native';
 
 import firebase from '../firebase/firebase';
-import logo from '../assets/logo.jpg';
+//import logo from '../assets/logo.jpg';
 export default class Setting extends Component {
   _onHandleSetting(value) {
     switch (value) {
@@ -37,12 +37,8 @@ export default class Setting extends Component {
     ];
     return (
       <View style={{ flex: 1 }}>
-        <Image
-          style={{ width: 180, height: 230, alignSelf: 'center', margin: 20 }}
-          source={logo}
-        />
         <FlatList
-          style={{ flex: 1, margin: 16 }}
+          style={{ flex: 1, margin: 1 }}
           data={items}
           renderItem={({ item }) => (
             <TouchableHighlight

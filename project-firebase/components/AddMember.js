@@ -13,6 +13,8 @@ import Gallary from './GetImageFromGallary';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import uuid from 'react-native-uuid';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+const urlImageBookDefault =
+  'https://firebasestorage.googleapis.com/v0/b/quanlysach-f234d.appspot.com/o/books%2Fbook_default.jpg?alt=media&token=9cf5d5f1-8cd0-4247-b115-12ef7615c35f';
 
 const gallary = new Gallary();
 export default class AddMember extends Component {
@@ -31,7 +33,7 @@ export default class AddMember extends Component {
 
   componentDidMount() {
     if (this.state.updateMember) {
-      this.setState({
+        this.setState({
         fullname: this.state.updateMember.fullname,
         dateJoin: this.state.updateMember.dateJoin,
         contact: this.state.updateMember.contact,
@@ -84,10 +86,13 @@ export default class AddMember extends Component {
       contact: '',
     });
   };
+   _onHandleAddMember = async (member) => {
+    member.urlImageBook = await this._uploadImageToFirebase();
 
-  _onHandleAddMember = async (member) => {
-    member.urlAvatar = await this._uploadImageToFirebase();
+    if (!member.urlImageBook) member.urlImageBook = urlImageBookDefault;
 
+  // _onHandleAddMember = async (member) => {
+  //   member.urlAvatar = await this._uploadImageToFirebase();
     firebase
       .database()
       .ref('Member')
